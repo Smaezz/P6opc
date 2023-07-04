@@ -1,5 +1,6 @@
-
+//gallerie photos de l'api
   const gallery = document.getElementById("gallery");
+  const figure = document.getElementById("figure")
 
 fetch("http://localhost:5678/api/works")
   .then(response => response.json())
@@ -16,8 +17,140 @@ fetch("http://localhost:5678/api/works")
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement)
+      console.log(gallery);
     });
   })
   .catch(error => {
-    console.log(error);
   });
+
+//bouton1 sans filtre
+const button1 = document.querySelector(".b1");
+
+button1.addEventListener('click', () => {
+  button1.classList.add('hover');
+  button2.classList.remove('hover');
+  button3.classList.remove('hover');
+  button4.classList.remove('hover');
+  document.getElementById('gallery').innerHTML = "";
+fetch("http://localhost:5678/api/works")
+  .then(response => response.json())
+  .then(data => {
+    const imagesData = data;
+    imagesData.forEach(image => {
+      const figureElement = document.createElement("figure");
+      const imgElement = document.createElement("img");
+      const figCaptionElement = document.createElement("figcaption");
+
+      imgElement.src = image.imageUrl;
+      imgElement.alt = image.title;
+      figCaptionElement.textContent = image.title;
+      figureElement.appendChild(imgElement);
+      figureElement.appendChild(figCaptionElement);
+      gallery.appendChild(figureElement);
+      console.log(gallery);
+    });
+  })
+  .catch(error => {
+  });
+})
+
+//filtre objets >> bouton2
+const button2 = document.querySelector(".b2");
+
+button2.addEventListener('click', () => {
+  button1.classList.remove('hover');
+  button2.classList.add('hover');
+  button3.classList.remove('hover');
+  button4.classList.remove('hover');
+  document.getElementById('gallery').innerHTML = "";
+  fetch("http://localhost:5678/api/works")
+  .then(response => response.json())
+  .then(data => {
+    const objetsData = data;
+    const filtreObjets = data.filter(element => element.category.name === "Objets");
+    filtreObjets.forEach(image => {
+      const figureElement = document.createElement("figure");
+      const imgElement = document.createElement("img");
+      const figCaptionElement = document.createElement("figcaption");
+
+      imgElement.src = image.imageUrl;
+      imgElement.alt = image.title;
+      figCaptionElement.textContent = image.title;
+      figureElement.appendChild(imgElement);
+      figureElement.appendChild(figCaptionElement);
+      gallery.appendChild(figureElement);
+
+      
+  
+      console.log(gallery);
+    });
+    
+    /*filtreObjets = document.createElement("gallery")
+    filtreObjets.appendChild(gallery)
+    //objetsData.id = data.filter(function(dataFilter) {objetsData.id == "1"});// Pour filtrer les objets avec l'ID 2, vous pouvez utiliser la méthode `filter` avec une fonction de rappel
+    */ // Affiche les objets filtrés dans la console
+  })
+})
+
+//filtre Appartements bouton3
+
+const button3 = document.querySelector(".b3");
+
+button3.addEventListener('click', () => {
+  button1.classList.remove('hover');
+  button2.classList.remove('hover');
+  button3.classList.add('hover');
+  button4.classList.remove('hover');
+  document.getElementById('gallery').innerHTML = "";
+  fetch("http://localhost:5678/api/works")
+  .then(response => response.json())
+  .then(data => {
+    const appartementsData = data;
+    const filtreAppartements = data.filter(element => element.category.name === "Appartements");
+    filtreAppartements.forEach(image => {
+      
+      const figureElement = document.createElement("figure");
+      const imgElement = document.createElement("img");
+      const figCaptionElement = document.createElement("figcaption");
+
+      imgElement.src = image.imageUrl;
+      imgElement.alt = image.title;
+      figCaptionElement.textContent = image.title;
+      figureElement.appendChild(imgElement);
+      figureElement.appendChild(figCaptionElement);
+      gallery.appendChild(figureElement);
+      console.log(data);
+    }); 
+  })
+})
+
+//filtre Hotel et restaurants
+const button4 = document.querySelector(".b4");
+
+button4.addEventListener('click', () => {
+  button1.classList.remove('hover');
+  button2.classList.remove('hover');
+  button3.classList.remove('hover');
+  button4.classList.add('hover');
+  document.getElementById('gallery').innerHTML = "";
+  fetch("http://localhost:5678/api/works")
+  .then(response => response.json())
+  .then(data => {
+    const hotelData = data;
+    const filtreHotel = data.filter(element => element.category.name === "Hôtels & restaurants");
+    filtreHotel.forEach(image => {
+      
+      const figureElement = document.createElement("figure");
+      const imgElement = document.createElement("img");
+      const figCaptionElement = document.createElement("figcaption");
+
+      imgElement.src = image.imageUrl;
+      imgElement.alt = image.title;
+      figCaptionElement.textContent = image.title;
+      figureElement.appendChild(imgElement);
+      figureElement.appendChild(figCaptionElement);
+      gallery.appendChild(figureElement);
+      console.log(data);
+    }); 
+  })
+})
