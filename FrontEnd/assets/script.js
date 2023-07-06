@@ -17,7 +17,6 @@ fetch("http://localhost:5678/api/works")
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement)
-      console.log(gallery);
     });
   })
   .catch(error => {
@@ -47,7 +46,6 @@ fetch("http://localhost:5678/api/works")
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement);
-      console.log(gallery);
     });
   })
   .catch(error => {
@@ -79,16 +77,7 @@ button2.addEventListener('click', () => {
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement);
-
-      
-  
-      console.log(gallery);
-    });
-    
-    /*filtreObjets = document.createElement("gallery")
-    filtreObjets.appendChild(gallery)
-    //objetsData.id = data.filter(function(dataFilter) {objetsData.id == "1"});// Pour filtrer les objets avec l'ID 2, vous pouvez utiliser la méthode `filter` avec une fonction de rappel
-    */ // Affiche les objets filtrés dans la console
+    })
   })
 })
 
@@ -119,8 +108,8 @@ button3.addEventListener('click', () => {
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement);
-      console.log(data);
-    }); 
+      console.log(button3);
+    })
   })
 })
 
@@ -136,8 +125,8 @@ button4.addEventListener('click', () => {
   fetch("http://localhost:5678/api/works")
   .then(response => response.json())
   .then(data => {
-    const hotelData = data;
-    const filtreHotel = data.filter(element => element.category.name === "Hôtels & restaurants");
+    const hotelsData = data;
+    const filtreHotel = data.filter((element) => element.category.name === "Hotels & restaurants");
     filtreHotel.forEach(image => {
       
       const figureElement = document.createElement("figure");
@@ -150,7 +139,8 @@ button4.addEventListener('click', () => {
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement);
-      console.log(data);
-    }); 
+      console.log(button4);
+    })
   })
 })
+
