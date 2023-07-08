@@ -108,7 +108,6 @@ button3.addEventListener('click', () => {
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement);
-      console.log(button3);
     })
   })
 })
@@ -139,7 +138,6 @@ button4.addEventListener('click', () => {
       figureElement.appendChild(imgElement);
       figureElement.appendChild(figCaptionElement);
       gallery.appendChild(figureElement);
-      console.log(button4);
     })
   })
 })
