@@ -55,11 +55,11 @@ body {
 }
 header {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -68,27 +68,25 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C;
 }
 
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
 }
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
@@ -104,7 +102,7 @@ li:hover {
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
 }
 #introduction img {
 	display: block;
@@ -113,7 +111,7 @@ li:hover {
 }
 
 #introduction article {
-	flex: 1
+	flex: 1;
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -209,7 +207,7 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
 
 /*Page de connexion*/
@@ -278,13 +276,17 @@ a:hover {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: #fff;
-  max-width: 400px;
+  width: 60%;
   margin: 100px auto;
   padding: 20px;
   border-radius: 5px;
@@ -292,14 +294,122 @@ a:hover {
 
 #contentTextarea {
   width: 100%;
-  height: 200px;
-  resize: none;
+  /*resize: none;*/
   margin-bottom: 10px;
 }
 
+/*bandeau pour modale*/
+.bandeauModal {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 59px;
+   background-color: black;
+}
+#modalBtn {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	font-size: 12px;
+	cursor: pointer;
+	width:50%;
+	height: 100%;
+	color: white;
+	background-color: black;
+	border: none;
+ }
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 50px 0;
+}
+.fa-pen-to-square {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	width: 20px;
+	height: 20px;
+	color: white;
+	font-size: 20px;
+}
 
+#publishBtn {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	border-radius: 30px;
+	cursor: pointer;
+	margin-left: -25rem;
+	font-size: 12px;
+}
+/*Boite modale*/
+.titreMod {
+	font-family: "Work sans";
+	font-weight: 400;
+	font-size: 26px;
+    line-height: 30,5px;
+	color:black;
+	padding-top: 2rem;
+	padding-bottom: 1rem;
+}
 
+#photoMoins {
+	margin-top: 1rem;
+	background-color: #fff;
+	border: none;
+}
 
+#contentTextarea {
+	width: 60%;
+	height: 305px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 5px;
+	grid-row-gap: 5px;
+	padding: 2rem;
+}
 
-
+#contentTextarea img {
+	display: flex;
+	width: 100%;
+	height: 102px;
+}
+#boxXmark {
+	display: flex;
+	width: 30px;
+	height: 30px;
+}
+.fa-xmark {
+	width: 100%;
+	height: 100%;
+}
+#poubelleDiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 18px;
+	height: 18px;
+}
+.fa-trash-can {
+	display: flex;
+	width: 20px;
+	height: 20px;
+	background-color: black;
+	color:#fff;
+	position: relative;
+	left: 50px;
+	top: 25px;
+}
+/*fenetre modal2*/
+.modal2 {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+  }
 
