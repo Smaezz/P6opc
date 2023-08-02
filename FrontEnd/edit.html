@@ -24,33 +24,42 @@
 	    </button>
 	    <button id="publishBtn" class="closeModaleBtn">Publier les changements</button>
           <div id="modal" class="modal">
-	        <div class="modal-content">
-				    <i class="fas fa-xmark closeModaleBtn" style="color: #000000;"></i>
+	        <div id="modal-content" class="modal-content">
+				    <i id="xmark" class="fas fa-xmark closeModaleBtn" style="color: #000000;"></i>
 		            <h2 class="titreMod">Galerie photo</h2>
 		            <div id="contentTextarea">
-		
 					</div>
 		    <button id="photoPlus" class="button hover">Ajouter une photo</button>
 		    <button id="photoMoins">Supprimer une photo</button>
 	        </div>
 	      </div>
 		  <div id="modal2" class="modal2">
-            <span class="close">&times;</span>
-            <span class="back">&larr;</span>
-            <div class="modal-content">
-	        <div id="login">
-                <h2 class="titleLogin">Ajout photo</h2>
-                <input id="photo" type="file" name="photo">
-                <div class="e_mail">
-                    <label for="titre">Titre</label>
-                    <input class="email_input" name="titre" id="titre" required>               
-                </div>
-                <div class="passe">
-                    <label for="categorie">Catégorie</label>
-                    <input class="passe_input" name="categorie" id="categorie" required>
-                </div>   
-                <span id="error"></span>    
-                <button id="valider">Valider</button>
+            
+            <div id="modal-content" class="modal-content">
+				<div class="iconesM2">
+					<i id= "arrowLeft" class="fas fa-arrow-left" style="color: #000000;"></i>
+					<i id= "xmark2" class="fas fa-xmark" style="color: #000000; display: flex; justify-content: end;"></i>                   
+				</div>
+	    
+	        <form action="" method="post" id="login" enctype="multipart/form-data" name="newWork">
+                    <h2 class="titleLogin">Ajout photo</h2>
+                    <input id="photo" type="file" src="" name="image_url" placeholder="Image URL">
+                    <div class="e_mail">
+                        <label for="titre">Titre</label>
+                        <input class="email_input" name="titre" id="titre" required>               
+                    </div>
+                    <div class="passe">
+                        <label for="categorie">Catégorie</label>
+                        <select class="passe_input" name="categorie" id="categorie" required>
+							<option value=""></option>
+						    <option value="Objets">Objets</option>
+					        <option value="Appartements">Appartements</option>
+						    <option value="Hôtels et restaurants">Hôtels et restaurants</option>
+					    </select>
+                    </div>   
+                    <span id="error"></span>    
+                    <input type="submit" id="valider" class=""></input>
+			</form>
             </div>
             </div>
 		  </div>
