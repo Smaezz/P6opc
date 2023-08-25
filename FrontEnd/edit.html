@@ -41,16 +41,16 @@
 					<i id= "xmark2" class="fas fa-xmark" style="color: #000000; display: flex; justify-content: end;"></i>                   
 				</div>
 	    
-	        <form action="" method="post" id="login" enctype="multipart/form-data" name="newWork">
+	        <form method="post" enctype="multipart/form-data" id="photoForm">
                     <h2 class="titleLogin">Ajout photo</h2>
-                    <input id="photo" type="file" src="" name="image_url" placeholder="Image URL">
+                    <input id="photoF" type="file" name="imageUrl" placeholder="Image URL" required/>
                     <div class="e_mail">
                         <label for="titre">Titre</label>
-                        <input class="email_input" name="titre" id="titre" required>               
+                        <input class="email_input" type="text" name="title" id="titre" required/>               
                     </div>
                     <div class="passe">
                         <label for="categorie">Catégorie</label>
-                        <select class="passe_input" name="categorie" id="categorie" required>
+                        <select class="passe_input" name="categoryId" id="categorie" required>
 							<option value=""></option>
 						    <option value="Objets">Objets</option>
 					        <option value="Appartements">Appartements</option>
@@ -58,7 +58,7 @@
 					    </select>
                     </div>   
                     <span id="error"></span>    
-                    <input type="submit" id="valider" class=""></input>
+                    <button type="submit" id="valider" class="">Valider</button>
 			</form>
             </div>
             </div>

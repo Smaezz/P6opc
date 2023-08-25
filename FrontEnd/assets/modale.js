@@ -11,15 +11,14 @@ const valider = document.getElementById('valider');
 
 
 // Ouvrir la fenêtre modale
-  modalBtn.addEventListener('click', () => {
-  modal.style.display = 'block';
-  
+modalBtn.addEventListener('click', () => {
+  modal.style.display = 'block'; 
 //gallerie photos de l'api pour modale 
 fetch("http://localhost:5678/api/works")
   .then(response => response.json())
   .then(data => {
     const imagesData = data;
-  
+
     imagesData.forEach(image => {
       const figureElement = document.createElement("figure");
       const imgElement = document.createElement("img");
@@ -38,18 +37,14 @@ fetch("http://localhost:5678/api/works")
     figureElement.appendChild(imgElement);
     figureElement.appendChild(figCaptionElement);
     contentTextarea.appendChild(figureElement);
-    console.log(corbeille);
-    // delete = 
+    
+    // delete =  
+    //fetch("http://localhost:5678/api/works") 
   
-      corbeille.addEventListener("click", () => {
-      figureElement.remove();
-      });
 
-
-  })
-
-  }); 
-  });
+        })
+      })
+    }); 
 //Fermer la fenêtre modale
     closeModalBtn.addEventListener('click', () => {
         modal.style.display = 'none';
@@ -117,24 +112,110 @@ if (boutonsCorbeille.length > 0) {
         modal2.style.display = 'block';        
 });
 
+
+
 //fetch post work
-async function fetchUser () {
-  const r = await fetch("http://localhost:5678/api/works",{
-  method:'POST',
-  headers: { 
-             "Accept": "application/json",
-             "Content-Type": "application/json" 
-             },
-             body: JSON.stringify({title: "mon premier titre"})
-            })
-             if (r.ok === true) {
-              return r.json();
-             }
-             throw new Error ('impossible de contacter le serveur')
-}
+//Requête post connexion
+async function login() {
+  const valider = document.getElementById('valider');
+  
+  // Quand on submit
+  valider.addEventListener('submit', async(event) => { 
+  // On empêche le comportement par défaut
+  event.preventDefault();
+  
+  // on récupère les données du formulaire dans une constante
+   let formData = {
+    image: event.target.querySelector("[name=imageUrl]").value,
+    title: event.target.querySelector("[name=title]").value,
+    category: event.target.querySelector("[name=categoryId]").value,
+    }
+  
+  // Envoi de la requête à l'API 
+  fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      headers: {    
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)       
+      })
+     
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          window.location.href="edit.html"
+          const imagesData = data;
 
-fetchUser().then(users=> console.log(users));
+          imagesData.forEach(image => {
+            const figureElement = document.createElement("figure");
+            const imgElement = document.createElement("img");
+            const figCaptionElement = document.createElement("figcaption");
+            const corbeille = document.createElement('i');
+            //corbeille.textContent = "Corbeille";
+        
+            imgElement.src = image.imageUrl;
+            imgElement.alt = image.title;
+            figCaptionElement.textContent = "éditer";
+      
+      //insérer l'icone à la place du texte "Corbeille"
+        corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
+          //imgElement.appendChild(corbeille)
+          figureElement.appendChild(corbeille);
+          figureElement.appendChild(imgElement);
+          figureElement.appendChild(figCaptionElement);
+          contentTextarea.appendChild(figureElement);
+          
+        })
+      }
+        else { 
+  // La requête a échoué
+          error.textContent="Erreur"
+        }
+      }
+      )
+      })
+      }
+    
+  
 
+
+/* 
+let form = document.getElementById("photoForm");
+let photoForm = document.getElementById("photoF");
+let photoFormValue = photoForm.value ;
+let titre = document.getElementById("titre");
+let titreValue = titre.value ; 
+let categorie = document.getElementById("categorie");
+let categorieValue = categorie.value;
+let formData = new FormData(form);
+//formData.append("image"= photoFormValue);
+//formData.append("title"= titreValue);
+//formData.append("category"= categorieValue);
+console.log(formData);
+JSON.stringify(formData);
+
+valider.addEventListener('submit',(event) => {
+  event.preventDefault();
+  fetch('http://localhost:5678/api/works', {
+    method: "POST",
+    headers: {
+        accept: "application/json",
+        "Content-type": "application/json",
+    },
+    body: JSON.stringify({ image: photoForm, title: titre, category: categorieValue }),
+  })
+          .then(response => response.json())
+          .then(data => {
+          let respData = data;
+            // Traiter les données reçues du serveur
+            console.log(respData);
+          })   
+          .catch(error => {
+            alert(error);// Gérer l'erreur
+          });   
+        });   
+           
+*/
 /*** 
 //Créer un nouvel objet figure
 valider.addEventListener('click',() => {
