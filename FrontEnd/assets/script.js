@@ -22,7 +22,7 @@ fetch("http://localhost:5678/api/works")
   .catch(error => {
   });
 
-//bouton1 sans filtre
+//sans filtre >> bouton1
 const button1 = document.querySelector(".b1");
 
 button1.addEventListener('click', () => {

@@ -8,13 +8,19 @@ const contentTextarea = document.getElementById('contentTextarea');
 const photoPlus = document.getElementById('photoPlus');
 const publishBtnCloseMod = document.getElementById('publishBtn');
 const valider = document.getElementById('valider');
+const poubelle = document.getElementById('poubelleDiv');
+const bandeauModal = document.getElementById('modalbtn');
 
 
-// Ouvrir la fenêtre modale
+// Ouvrir la fenêtre modale gallery
 modalBtn.addEventListener('click', () => {
-  modal.style.display = 'block'; 
+  modal.style.display = 'block';
+  modalGallery();
+});
+
 //gallerie photos de l'api pour modale 
-fetch("http://localhost:5678/api/works")
+function modalGallery() {
+  fetch("http://localhost:5678/api/works")
   .then(response => response.json())
   .then(data => {
     const imagesData = data;
@@ -24,271 +30,188 @@ fetch("http://localhost:5678/api/works")
       const imgElement = document.createElement("img");
       const figCaptionElement = document.createElement("figcaption");
       const corbeille = document.createElement('i');
-      //corbeille.textContent = "Corbeille";
-  
+
       imgElement.src = image.imageUrl;
       imgElement.alt = image.title;
       figCaptionElement.textContent = "éditer";
 
-//insérer l'icone à la place du texte "Corbeille"
-  corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
-    //imgElement.appendChild(corbeille)
-    figureElement.appendChild(corbeille);
-    figureElement.appendChild(imgElement);
-    figureElement.appendChild(figCaptionElement);
-    contentTextarea.appendChild(figureElement);
-    
-    // delete =  
-    //fetch("http://localhost:5678/api/works") 
-  
+      //insérer l'icone "Corbeille"
+      corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
+      figureElement.appendChild(corbeille);
+      figureElement.appendChild(imgElement);
+      figureElement.appendChild(figCaptionElement);
+      contentTextarea.appendChild(figureElement);
 
-        })
-      })
-    }); 
+    })
+  })
+};
+
 //Fermer la fenêtre modale
-    closeModalBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        contentTextarea.innerHTML="";            //pour vider la modale
-    });
-
-  // Supprimer un objet de la Gallerie
-   /**** delete image  ****/
-   /*const boutonsCorbeille = document.querySelectorAll(".fas.fa-trash-can");
-console.log(boutonsCorbeille);
-if (boutonsCorbeille.length > 0) {
-  boutonsCorbeille.forEach(boutonCorbeille => {
-    boutonCorbeille.addEventListener("click", function (e) {
-      let figure = boutonCorbeille.parentNode;
-      figure.remove();
-    });
-  });
-}    */
-   /*trashButton.forEach((trash) => {
-   
-     trashButton.addEventListener("click", function (e) {
-       let figure = trashButton.parentNode;
-       let idPhoto = figure.id;
-       async function deleteProject() {
-         await fetch(`http://localhost:5678/api/works/{id}`, {
-           method: "DELETE",
-           headers: {
-            'Content-Type': 'application/json'
-          },
-           body: {
-           "id": idPhoto,
-           "title": titreNew,
-           "imageUrl": "string",
-           "categoryId": categorie,
-           "userId": "",
-          }
-         }).then(function (response) {
-           if (response.status === 200) {
-             figure.remove();
-             let figureDelete = figure.id;
-             const figureToDelete = document.getElementById(figureDelete);
-             figureToDelete.remove();
-           } else if (response.status === 401) {
-             resStatus = response.status;
-             alertModalGallery.style.display = "flex";
-             alertModalGallery.innerHTML =
-               "Vous n'avez pas les autorisations pour effacer le fichier, statut " +
-               resStatus;
-           } else {
-             resStatus = response.status;
-             alertModalGallery.style.display = "flex";
-             alertModalGallery.innerHTML =
-               "Impossible d'effacer le fichier, problème d'accès à l'API." +
-               resStatus;
-           }
-         });
-       }
-       deleteProject();
-     })
-    });
-  */
-//Ouverture modal2 pour ajout
-    photoPlus.addEventListener('click',() => {
-        modal.style.display = 'none';
-        modal2.style.display = 'block';        
+closeModalBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  contentTextarea.innerHTML = "";            //pour vider la modale
 });
 
+//Ouverture modal2 pour ajout
+photoPlus.addEventListener('click', () => {
+  modal.style.display = 'none';
+  modal2.style.display = 'block';
+});
 
+// Récupération des données du formulaire.
+const formData = new FormData(document.getElementById("photoForm"));
+console.log(formData);
 
-//fetch post work
-//Requête post connexion
-async function login() {
-  const valider = document.getElementById('valider');
-  
-  // Quand on submit
-  valider.addEventListener('submit', async(event) => { 
-  // On empêche le comportement par défaut
-  event.preventDefault();
-  
-  // on récupère les données du formulaire dans une constante
-   let formData = {
-    image: event.target.querySelector("[name=imageUrl]").value,
-    title: event.target.querySelector("[name=title]").value,
-    category: event.target.querySelector("[name=categoryId]").value,
-    }
-  
-  // Envoi de la requête à l'API 
-  fetch('http://localhost:5678/api/works', {
+  // post newWork
+  valider.addEventListener('submit', async (event) => {
+    // On empêche le comportement par défaut
+    event.preventDefault();
+
+    // on récupère les données du formulaire dans une constante
+    newElement = formData
+console.log(newElement);
+    // Envoi de la requête à l'API 
+    fetch('http://localhost:5678/api/works', {
       method: 'POST',
-      headers: {    
-         'Content-Type': 'application/json'
+      headers: {
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)       
-      })
-     
+      body: JSON.stringify(newElement)  
+    })
       .then(response => response.json())
       .then(data => {
         if (data) {
-          window.location.href="edit.html"
-          const imagesData = data;
-
-          imagesData.forEach(image => {
-            const figureElement = document.createElement("figure");
-            const imgElement = document.createElement("img");
-            const figCaptionElement = document.createElement("figcaption");
-            const corbeille = document.createElement('i');
-            //corbeille.textContent = "Corbeille";
-        
-            imgElement.src = image.imageUrl;
-            imgElement.alt = image.title;
-            figCaptionElement.textContent = "éditer";
-      
-      //insérer l'icone à la place du texte "Corbeille"
-        corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
-          //imgElement.appendChild(corbeille)
-          figureElement.appendChild(corbeille);
-          figureElement.appendChild(imgElement);
-          figureElement.appendChild(figCaptionElement);
-          contentTextarea.appendChild(figureElement);
-          
+          window.location.href = "edit.html"
+          modalGallery()
+          }
         })
+       // else {
+          // La requête a échoué
+       //  error.textContent = "Erreur"
+      //  }
       }
-        else { 
-  // La requête a échoué
-          error.textContent="Erreur"
-        }
-      }
-      )
-      })
-      }
-    
-  
+    )
 
 
-/* 
-let form = document.getElementById("photoForm");
-let photoForm = document.getElementById("photoF");
-let photoFormValue = photoForm.value ;
-let titre = document.getElementById("titre");
-let titreValue = titre.value ; 
-let categorie = document.getElementById("categorie");
-let categorieValue = categorie.value;
-let formData = new FormData(form);
-//formData.append("image"= photoFormValue);
-//formData.append("title"= titreValue);
-//formData.append("category"= categorieValue);
-console.log(formData);
-JSON.stringify(formData);
-
-valider.addEventListener('submit',(event) => {
-  event.preventDefault();
-  fetch('http://localhost:5678/api/works', {
-    method: "POST",
-    headers: {
-        accept: "application/json",
-        "Content-type": "application/json",
-    },
-    body: JSON.stringify({ image: photoForm, title: titre, category: categorieValue }),
-  })
-          .then(response => response.json())
-          .then(data => {
-          let respData = data;
-            // Traiter les données reçues du serveur
-            console.log(respData);
-          })   
-          .catch(error => {
-            alert(error);// Gérer l'erreur
-          });   
-        });   
-           
-*/
-/*** 
-//Créer un nouvel objet figure
-valider.addEventListener('click',() => {
-
-      const figureElement = document.createElement("figure");
-      const imgElement = document.createElement("img");
-      let photoNew = document.getElementById("photo").value;
-      imgElement.innerHTML = photoNew;
-      console.log(photoNew);
-      const figCaptionElement = document.createElement("figcaption");
-      const corbeille = document.createElement('i');
-      corbeille.textContent = "Corbeille";
-      
-  
-      /*imgElement.src = image.imageUrl;
-      imgElement.alt = image.title;*/
- /*     figCaptionElement.textContent = "éditer";
-
-//insérer l'icone à la place du texte "Corbeille"
-corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
-
-
-
-  figureElement.appendChild(corbeille);
-  figureElement.appendChild(imgElement);
-  figureElement.appendChild(figCaptionElement);
-  contentTextarea.appendChild(figureElement);  
-
-
-
-  //fermeture modale2
-  
-  modal2.style.display = 'none';  
-  modal.style.display = 'block';    
-  });      ***/
-
-  // retour arrowLeft
-  const arrowLeft = document.getElementById("arrowLeft")
-  arrowLeft.addEventListener('click', () => {
-  modal2.style.display = 'none';  
+// retour arrowLeft
+const arrowLeft = document.getElementById("arrowLeft")
+arrowLeft.addEventListener('click', () => {
+  modal2.style.display = 'none';
   modal.style.display = 'block';
-  })
+})
 
 // fermeture par xmark2
 const xmark2 = document.getElementById("xmark2");
 xmark2.addEventListener('click', () => {
-    modal2.style.display = 'none';  
-    modal.style.display = 'none';
-    contentTextarea.innerHTML="";  //pour vider la modale
-  });
-
+  modal2.style.display = 'none';
+  modal.style.display = 'none';
+  contentTextarea.innerHTML = "";  //pour vider la modale
+});
 
 
 // Ajoute un écouteur d'événement `click` à l'élément `#modal`.
-//modal.addEventListener("click", () => {
-  
-    // Ajoute un écouteur d'événement `click` à l'élément `#modal`.
-  
-    modal.addEventListener("click", function (event) {
-      // Vérifie si l'événement a été déclenché à l'extérieur de la fenêtre modale.
-      if (event.target.closest("#modal-content") === null) {
-        modal2.style.display = 'none';  
-      modal.style.display = 'none';
-      contentTextarea.innerHTML="";  
-      }
-      });
 
-      modal2.addEventListener("click", function (event) {
-        // Vérifie si l'événement a été déclenché à l'extérieur de la fenêtre modale.
-        if (event.target.closest("#modal-content") === null) {
-          modal2.style.display = 'none';  
-        modal.style.display = 'none';
-        contentTextarea.innerHTML="";  
-        }
-        });
+modal.addEventListener("click", function (event) {
+  // Vérifie si l'événement a été déclenché à l'extérieur de la fenêtre modale.
+  if (event.target.closest("#modal-content") === null) {
+    modal2.style.display = 'none';
+    modal.style.display = 'none';
+    contentTextarea.innerHTML = "";
+  }
+});
 
+modal2.addEventListener("click", function (event) {
+  // Vérifie si l'événement a été déclenché à l'extérieur de la fenêtre modale.
+  if (event.target.closest("#modal-content") === null) {
+    modal2.style.display = 'none';
+    modal.style.display = 'none';
+    contentTextarea.innerHTML = "";
+  }
+});
+
+
+/** 
+
+// Événement pour valider une photo dans data
+publishBtnCloseMod.addEventListener("click", (event) => {
+  event.preventDefault();
+  const inputTittle = document.querySelector("#inputTittle").value;
+  formData.append("title", inputTittle);
+
+  const selectorCategory = document.querySelector("#selectorCategory").value;
+  formData.append("category", selectorCategory);
+  createWorks();
+});
+
+
+// Fonction asynchrone pour créer une nouvelle œuvre
+async function createWorks() {
+  const token = sessionStorage.getItem("token");
+  const response = await fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Accept: "application/json;charset=utf-8",
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+}
+
+// Fonction asynchrone pour supprimer une œuvre par son ID
+async function deleteWorks(id) {
+  const token = sessionStorage.getItem("token");
+  const response = await fetch("http://localhost:5678/api/works/" + id, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json;charset=utf-8",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (response.ok) {
+    works = works.filter((work) => work.id !== id);
+    displayWork();
+  }
+}
+
+// Fonction pour supprimer une œuvre de la liste
+let i = poubelle.id
+function delework(i) {
+  works.splice(i, 1);
+  displayWork();
+}
+*/
+
+/** 
+// Fonction asynchrone pour supprimer une œuvre par son ID
+async function deleteWorks(id) {
+  const token = localStorage.getItem("token");
+  const response = await fetch("http://localhost:5678/api/works/" + id, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json;charset=utf-8",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (response.ok) {
+    works = works.filter((work) => work.id !== id);
+    displayWork();
+  }
+}
+*/
+
+/** 
+//DELETE icone Corbeille
+const corbeille = document.createElement('i');
+
+poubelle.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const cardDelete = e.target.parentNode.getAttribute("data-card-id");
+  removeElement(cardDelete);
+  deletedImages[cardDelete] = true;
+  console.log(deletedImages);
+  // Convertir l'objet en chaîne de caractères JSON
+  const deletedImagesJSON = JSON.stringify(deletedImages);
+  // Stocker JSON dans sessionStorage
+  sessionStorage.setItem("deletedImages", deletedImagesJSON);
+});
+*/

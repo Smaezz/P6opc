@@ -406,8 +406,9 @@ i.closeModaleBtn {
 	background-color: black;
 	color:#fff;
 	position: relative;
-	left: 50px;
+	left: 75%;
 	top: 25px;
+	cursor: pointer;
 }
 /*fenetre modal2*/
 .modal2 {
