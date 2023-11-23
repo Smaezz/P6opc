@@ -8,9 +8,14 @@ const contentTextarea = document.getElementById("contentTextarea");
 const photoPlus = document.getElementById("photoPlus");
 const publishBtnCloseMod = document.getElementById("publishBtn");
 const valider = document.getElementById("valider");
-const poubelle = document.getElementById("poubelleDiv");
 const bandeauModal = document.getElementById("modalbtn");
 const photoForm = document.getElementById("photoForm");
+const figureElement = document.createElement("figure");
+const imgElement = document.createElement("img");
+const figCaptionElement = document.createElement("figcaption");
+const corbeille = document.createElement("i");
+corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
+const poubelle = document.getElementById("poubelleDiv");
 
 // Ouvrir la fenêtre modale gallery
 modalBtn.addEventListener("click", () => {
@@ -25,25 +30,25 @@ function modalGallery() {
     .then((data) => {
       const imagesData = data;
 
-      imagesData.forEach((image, index) => {
+      imagesData.forEach((image) => {
         const figureElement = document.createElement("figure");
         const imgElement = document.createElement("img");
         const figCaptionElement = document.createElement("figcaption");
-        const corbeille = document.createElement("i");                
-
+        const corbeille = document.createElement("i");
+                
         imgElement.src = image.imageUrl;
         imgElement.alt = image.title;
         // figCaptionElement.textContent = "éditer";
-
-        // insérer l'icone "Corbeille"
         corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
+        corbeille.addEventListener("click", () => {
+                deleteWork();
+        })
+        // insérer l'icone "Corbeille"
         figureElement.appendChild(corbeille);
         figureElement.appendChild(imgElement);
         figureElement.appendChild(figCaptionElement);
-        contentTextarea.appendChild(figureElement); 
-        console.log(image, index, corbeille);
-      });
-      console.log(modalGallery);
+        contentTextarea.appendChild(figureElement);    
+      });     
     });
 }
 
@@ -93,10 +98,7 @@ async function addWork(event) {
       });
 
       if (response.status === 201) {
-          alert("Projet ajouté avec succès :)");
-          window.location.href = "index.html";
-
-          
+          alert("Projet ajouté avec succès :)");          
       } else if (response.status === 400) {
           alert("Merci de remplir tous les champs");
       } else if (response.status === 500) {
@@ -108,7 +110,9 @@ async function addWork(event) {
 
   catch (error) {
       console.log(error);
-}}}
+}
+
+}};
 // retour arrowLeft
 const arrowLeft = document.getElementById("arrowLeft");
 arrowLeft.addEventListener("click", () => {
@@ -148,3 +152,28 @@ modal2.addEventListener("click", function (event) {
 });
 
 // Supprimer un projet
+function deleteWork() {
+  const token = sessionStorage.getItem("token");
+  const id = 24;
+fetch(`http://localhost:5678/api/works/${id}`, {
+  method: "DELETE",
+  headers: { Authorization: `Bearer ${token}`},
+})
+
+.then (response => {
+  if (response.status === 204) {
+    alert("Element supprimé avec succés")
+      return modalGallery();
+  }
+  // Token incorrect
+  if (response.status === 401) {
+      alert("Vous n'êtes pas autorisé à supprimer ce projet, merci de vous connecter avec un compte valide")
+      window.location.href = "login.html";
+  }
+})
+.catch (error => {
+  console.log(error)
+});
+};
+
+  
