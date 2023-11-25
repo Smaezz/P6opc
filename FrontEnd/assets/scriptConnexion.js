@@ -21,20 +21,16 @@ connexion.addEventListener("submit", async (event) => {
   // Vérification de la réponse de l'API
   if (response.status === 200) {
     const token = await response.json();
-    const bandeauModal = document.getElementById("bandeauModal");
-
+    
     // Stockage du jeton d'authentification et de l'ID utilisateur dans le stockage de session
     sessionStorage.setItem("token", token.token);
     sessionStorage.setItem("userId", token.userId);
 
-    // Vérification du token
-    console.log(sessionStorage.getItem("token"));
-
     // Redirection de l'utilisateur vers la page d'accueil
     window.location.href = "index.html";
-    bandeauModal.style.display = "flex";
-    console.log(token);
+    
   } else {
     alert("Nom d'utilisateur ou mot de passe incorrect");
   }
 });
+

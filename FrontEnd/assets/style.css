@@ -314,8 +314,8 @@ i.closeModaleBtn {
 }
 
 /*bandeau pour modale*/
-.bandeauModal {
-   display: flex;
+#bandeauModal {
+   display: none;
    justify-content: center;
    align-items: center;
    width: 100%;
@@ -359,7 +359,23 @@ i.closeModaleBtn {
 	margin-left: -25rem;
 	font-size: 12px;
 }
-/*Boite modale*/
+/* Bouton modalTitle */
+.titleBox {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+#modalBtnTitle {
+	position: relative;
+	padding-bottom: 20px;
+	padding-left: 15px;
+	text-decoration: none;
+	background-color: #fff;
+	border: none;
+    cursor: pointer;
+}
+/* Boite modale */
 .titreMod {
 	font-family: "Work sans";
 	font-weight: 400;

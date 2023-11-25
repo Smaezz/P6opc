@@ -142,3 +142,15 @@ button4.addEventListener('click', () => {
   })
 })
 
+function afficherBandeau(token) {
+  const bandeauModal = document.getElementById("bandeauModal");
+
+  if (token) {
+    bandeauModal.style.display = "flex";
+  } else {
+    bandeauModal.style.display = "none";
+  }
+};
+const token = sessionStorage.getItem("token");
+
+afficherBandeau(token);
