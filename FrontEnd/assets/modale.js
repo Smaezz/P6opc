@@ -41,7 +41,8 @@ function modalGallery() {
         // figCaptionElement.textContent = "éditer";
         corbeille.innerHTML = `<i id="poubelleDiv" class="fas fa-trash-can"></i>`;
         corbeille.addEventListener("click", () => {
-                deleteWork();
+          console.log(image.id);
+                deleteWork(image.id);
         })
         // insérer l'icone "Corbeille"
         figureElement.appendChild(corbeille);
@@ -152,9 +153,9 @@ modal2.addEventListener("click", function (event) {
 });
 
 // Supprimer un projet
-function deleteWork() {
+function deleteWork(id) {
   const token = sessionStorage.getItem("token");
-  const id = 24;
+  // const id = 24;
 fetch(`http://localhost:5678/api/works/${id}`, {
   method: "DELETE",
   headers: { Authorization: `Bearer ${token}`},
@@ -163,12 +164,12 @@ fetch(`http://localhost:5678/api/works/${id}`, {
 .then (response => {
   if (response.status === 204) {
     alert("Element supprimé avec succés")
-      return modalGallery();
+    return modalGallery();
   }
   // Token incorrect
   if (response.status === 401) {
       alert("Vous n'êtes pas autorisé à supprimer ce projet, merci de vous connecter avec un compte valide")
-      window.location.href = "login.html";
+      window.location.href = "connexion.html";
   }
 })
 .catch (error => {
