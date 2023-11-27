@@ -177,4 +177,30 @@ fetch(`http://localhost:5678/api/works/${id}`, {
 });
 };
 
-  
+// Aperçu photo dans form
+// L'image img#image
+var image = document.getElementById("image");
+     
+// La fonction previewPicture
+var previewPicture  = function (e) {
+
+    // e.files contient un objet FileList
+    const [picture] = e.file
+
+    // "picture" est un objet File
+    if (picture) {
+
+        // L'objet FileReader
+        var reader = new FileReader();
+
+        // L'événement déclenché lorsque la lecture est complète
+        reader.onload = function (e) {
+            // On change l'URL de l'image (base64)
+            image.src = e.target.result
+        }
+
+        // On lit le fichier "picture" uploadé
+        reader.readAsDataURL(picture)
+
+    }
+} 

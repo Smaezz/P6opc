@@ -24,6 +24,7 @@ fetch("http://localhost:5678/api/works")
 
 //sans filtre >> bouton1
 const button1 = document.querySelector(".b1");
+button1.classList.add('hover');
 
 button1.addEventListener('click', () => {
   button1.classList.add('hover');
@@ -144,11 +145,13 @@ button4.addEventListener('click', () => {
 
 function afficherBandeau(token) {
   const bandeauModal = document.getElementById("bandeauModal");
-
+  const modalBtnTitle = document.getElementById("modalBtnTitle");
   if (token) {
     bandeauModal.style.display = "flex";
+    modalBtnTitle.style.display = "block";
   } else {
     bandeauModal.style.display = "none";
+    modalBtnTitle.style.display = "none";
   }
 };
 const token = sessionStorage.getItem("token");
