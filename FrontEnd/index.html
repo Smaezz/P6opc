@@ -45,12 +45,14 @@
 				</div>
 				<h2 class="titleMPhoto">Ajout photo</h2>
 				<form id="photoForm">
-					<div class="cadrePhoto">
-						<label class="send-image" for="photoF"><i class="fa-regular fa-image"></i></label>
+					<div class="cadrePhoto" id="cadrePhoto">
+						<label  class="send-image" for="photoF"><i class="fa-regular fa-image" id="iconImage"></i>
+							<img id="image"/>
+						</label>
 						<label class="changeButton" for="photoF" id="bouton-add">+ Ajouter photo</label>
-					    <input id="photoF" type="file" text="Ajouter photo" name="image" required>	
+					    <input id="photoF" type="file" onchange="previewPicture(this)" text="Ajouter photo" name="image" required>	
 						<label class="send-image" id="subtitle-image">jpg.png : 4mo max</label>
-						<div id="image-preview"></div>	
+						
 				    </div>
 					<div class="e_mail">
 						<label for="titre">Titre</label>
@@ -58,11 +60,11 @@
 					</div>
 					<div class="passe">
 						<label for="categorie" class="catTitle">Catégorie</label>
-						<select class="email-inputPhoto2" name="category" id="categorie" size="3" required>
-							<option value=""></option>
-							<option value="1">Objets</option>
-							<option value="2">Appartements</option>
-							<option value="3">Hôtels et restaurants</option>
+						<div class="email-inputPhoto2" id="divChevron"><img src="./assets/icons/chevron.png" alt="Chevron" class="chevron"></div>
+						<select class="email-inputPhoto2 selectForm" name="category" id="categorie" size="3" required>					
+							<option id="optionA" value="1">Objets</option>
+							<option id="optionB" value="2">Appartements</option>
+							<option id="optionC" value="3">Hôtels et restaurants</option>
 						</select>
 					</div>
 					<div class="lineMPhoto"></div>

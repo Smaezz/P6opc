@@ -65,9 +65,6 @@ photoPlus.addEventListener("click", () => {
   modal2.style.display = "block";
 });
 
-// post newWork
-
-
 // Ajouter un projet
 async function addWork(event) {
   event.preventDefault();
@@ -75,7 +72,6 @@ async function addWork(event) {
   const title = document.getElementById("titre").value;
   const category = document.getElementById("categorie").value;
   const image = document.getElementById("photoF").files[0];
-
 
   if (title === "" || category === "" || image === undefined) {
       alert("Merci de remplir tous les champs");
@@ -132,8 +128,6 @@ xmark2.addEventListener("click", () => {
   contentTextarea.innerHTML = ""; //pour vider la modale
 });
 
-// Ajoute un écouteur d'événement `click` à l'élément `#modal`.
-
 modal.addEventListener("click", function (event) {
   // Vérifie si l'événement a été déclenché à l'extérieur de la fenêtre modale.
   if (event.target.closest("#modal-content") === null) {
@@ -155,7 +149,7 @@ modal2.addEventListener("click", function (event) {
 // Supprimer un projet
 function deleteWork(id) {
   const token = sessionStorage.getItem("token");
-  // const id = 24;
+
 fetch(`http://localhost:5678/api/works/${id}`, {
   method: "DELETE",
   headers: { Authorization: `Bearer ${token}`},
@@ -178,29 +172,54 @@ fetch(`http://localhost:5678/api/works/${id}`, {
 };
 
 // Aperçu photo dans form
-// L'image img#image
-var image = document.getElementById("image");
-     
-// La fonction previewPicture
-var previewPicture  = function (e) {
+let image = document.getElementById("image");
+const iconImage = document.getElementById("iconImage");
+const cadrePhoto = document.getElementById("cadrePhoto");
 
-    // e.files contient un objet FileList
-    const [picture] = e.file
+const previewPicture = function (e) {
+  const [picture] = e.files
+  if (picture) {
+    image.src = URL.createObjectURL(picture);
+    // cadrePhoto.innerHTML = "";
+    cadrePhoto.appendChild(image);
+    // iconImage.style.display = "none";
+    image.style.display = "flex";
+  }
+}
 
-    // "picture" est un objet File
-    if (picture) {
+//Fonction du changement de couleur du bouton valider quand image et titre sont présents
 
-        // L'objet FileReader
-        var reader = new FileReader();
 
-        // L'événement déclenché lorsque la lecture est complète
-        reader.onload = function (e) {
-            // On change l'URL de l'image (base64)
-            image.src = e.target.result
-        }
+// gestion selection
+const divChevron = document.getElementById("divChevron");
+const select = document.getElementById("categorie");
 
-        // On lit le fichier "picture" uploadé
-        reader.readAsDataURL(picture)
+divChevron.addEventListener("click", function (event) {
+  select.style.display="flex";
+});
 
-    }
-} 
+// valeur select dans catégorie
+const option1 = document.getElementById("optionA");
+const option2 = document.getElementById("optionB");
+const option3 = document.getElementById("optionC");
+
+option1.addEventListener("click", function (event) {
+  divChevron.innerHTML="";
+  divChevron.innerText="Objets";
+  divChevron.style.justifyContent="start";
+  select.style.display="none";
+});
+
+option2.addEventListener("click", function (event) {
+  divChevron.innerHTML="";
+  divChevron.innerText="Appartements";
+  divChevron.style.justifyContent="start";
+  select.style.display="none";
+});
+
+option3.addEventListener("click", function (event) {
+  divChevron.innerHTML="";
+  divChevron.innerText="Hôtels et restaurants";
+  divChevron.style.justifyContent="start";
+  select.style.display="none";
+});

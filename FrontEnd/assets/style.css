@@ -237,6 +237,12 @@ footer nav ul {
 }
 
 /*Page de connexion*/
+.titleLoginEmail {
+	margin-bottom: 10px;
+}
+.titleLoginPass {
+	margin-bottom: 10px;
+}
 #login {
 	margin-top: 5rem;
 	display: flex;
@@ -257,7 +263,7 @@ footer nav ul {
 .email_input {
     width: 379px;
 	height: 51px;
-	box-shadow: 0px 5px 5px rgb(246, 242, 242);
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	border: none;
 }
 .passe {
@@ -267,7 +273,7 @@ footer nav ul {
 .passe_input {
     width: 379px;
 	height: 51px;
-	box-shadow: 0px 5px 5px rgb(246, 242, 242);
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	border: none;
 	background: white;
 }
@@ -564,15 +570,17 @@ i.fa-regular.fa-image::before {
 #titre.email_inputPhoto2 {
     width: 420px;
 	height: 51px;
-	box-shadow: 0px 5px 5px rgb(246, 242, 242);
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	border: none;
+	margin-top: 10px;
 }
 
 .email-inputPhoto2 {
 	width: 420px;
 	height: 51px;
-	box-shadow: 0px 5px 5px rgb(246, 242, 242);
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	border: none;
+	margin-top: 10px;
 }
 #valider {
 	display: flex;
@@ -616,4 +624,31 @@ i.fa-regular.fa-image::before {
 	border-bottom: 1px solid grey;
 	margin-bottom: 2rem;
 }
+
+#image {
+	position: absolute;
+	display: none;
+	object-fit: cover;
+	width: 250px;
+	height: 184px;
+}
+
+#divChevron {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	cursor: pointer;
+}
+.chevron {
+	display: flex;
+    width: 12px;
+    height: 12px;
+    padding-right: 30px;
+	cursor: pointer;
+}
+
+select {
+	display: none;
+}
+
 
