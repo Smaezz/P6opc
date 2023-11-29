@@ -158,6 +158,7 @@ fetch(`http://localhost:5678/api/works/${id}`, {
 .then (response => {
   if (response.status === 204) {
     alert("Element supprimé avec succés")
+    contentTextarea.innerHTML="";
     return modalGallery();
   }
   // Token incorrect
