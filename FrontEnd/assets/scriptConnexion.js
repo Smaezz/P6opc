@@ -1,6 +1,7 @@
 // Sélection de l'élément formulaire de connexion
 let connexion = document.getElementById("login");
 const bandeauModal = document.getElementById("bandeauModal");
+
 // Ajout d'un écouteur d'événement sur la soumission du formulaire
 connexion.addEventListener("submit", async (event) => {
   event.preventDefault(); // Empêche le rechargement de la page
@@ -21,16 +22,14 @@ connexion.addEventListener("submit", async (event) => {
   // Vérification de la réponse de l'API
   if (response.status === 200) {
     const token = await response.json();
-    
+
     // Stockage du jeton d'authentification et de l'ID utilisateur dans le stockage de session
     sessionStorage.setItem("token", token.token);
     sessionStorage.setItem("userId", token.userId);
 
     // Redirection de l'utilisateur vers la page d'accueil
     window.location.href = "index.html";
-    
   } else {
     alert("Nom d'utilisateur ou mot de passe incorrect");
   }
 });
-
