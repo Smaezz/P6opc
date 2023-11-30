@@ -148,9 +148,11 @@ button4.addEventListener("click", () => {
 function afficherBandeau(token) {
   const bandeauModal = document.getElementById("bandeauModal");
   const modalBtnTitle = document.getElementById("modalBtnTitle");
+  const loginLogout = document.getElementById("loginLogout");
   if (token) {
     bandeauModal.style.display = "flex";
     modalBtnTitle.style.display = "block";
+    loginLogout.innerHTML="logout";
   } else {
     bandeauModal.style.display = "none";
     modalBtnTitle.style.display = "none";
