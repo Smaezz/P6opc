@@ -57,7 +57,6 @@ function modalGallery() {
 closeModalBtn.addEventListener("click", () => {
   modal.style.display = "none";
   contentTextarea.innerHTML = ""; //pour vider la modale
-  window.location.reload();
 });
 
 // Ouverture modal2 pour ajout
@@ -97,10 +96,12 @@ async function addWork(event) {
 
       if (response.status === 201) {
           alert("Projet ajouté avec succès :)");
+          fetchWorks(); 
           modal2.style.display = "none";
           modal.style.display = "block";
           contentTextarea.innerHTML="";
-          modalGallery();       
+          modalGallery();      
+          
       } else if (response.status === 400) {
           alert("Merci de remplir tous les champs");
       } else if (response.status === 500) {
@@ -163,6 +164,7 @@ fetch(`http://localhost:5678/api/works/${id}`, {
 .then (response => {
   if (response.status === 204) {
     alert("Element supprimé avec succés")
+    fetchWorks();
     modal.style.display = "block";
     contentTextarea.innerHTML="";
     modalGallery();  

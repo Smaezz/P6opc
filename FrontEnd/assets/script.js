@@ -2,7 +2,7 @@
 const gallery = document.getElementById("gallery");
 const figure = document.getElementById("figure");
 
-fetch("http://localhost:5678/api/works")
+function fetchWorks() { fetch("http://localhost:5678/api/works")
   .then((response) => response.json())
   .then((data) => {
     const imagesData = data;
@@ -20,7 +20,8 @@ fetch("http://localhost:5678/api/works")
     });
   })
   .catch((error) => {});
-
+}
+fetchWorks();
 //sans filtre >> bouton1
 const button1 = document.querySelector(".b1");
 button1.classList.add("hover");
